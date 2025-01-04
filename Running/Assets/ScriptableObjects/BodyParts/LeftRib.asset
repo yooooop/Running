@@ -18,3 +18,4 @@ MonoBehaviour:
   <BodyPartType>k__BackingField: 6
   <BodyPartPrefab>k__BackingField: {fileID: 409506442824913100, guid: fba57a76853fb644b8caf432082dc882,
     type: 3}
+  <BodyPartDescription>k__BackingField: Swaps the player's and the opponent's number

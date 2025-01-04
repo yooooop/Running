@@ -14,6 +14,7 @@ namespace Running.BodyPart
         [field: SerializeField] public string BodyPartName { get; private set; }
         [field: SerializeField] public BodyPartType BodyPartType { get; private set; }
         [field: SerializeField] public BodyPartPrefab BodyPartPrefab { get; private set; }
+        [field: SerializeField] public string BodyPartDescription { get; private set; }
 
     }
 }

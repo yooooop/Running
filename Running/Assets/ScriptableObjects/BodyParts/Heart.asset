@@ -18,3 +18,4 @@ MonoBehaviour:
   <BodyPartType>k__BackingField: 0
   <BodyPartPrefab>k__BackingField: {fileID: 9016239904094854225, guid: 675799e49ab2edd4e893984a0487f8e1,
     type: 3}
+  <BodyPartDescription>k__BackingField: Tells the exact value of the opponent's card

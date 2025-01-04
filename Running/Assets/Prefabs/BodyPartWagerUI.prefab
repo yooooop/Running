@@ -948,7 +948,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b54e7b63c613a224b983ef76f4db3041, type: 2}
   - {fileID: 11400000, guid: b649b0c2da1719245936243479ff1eab, type: 2}
   - {fileID: 11400000, guid: 58ca77cce1f2d8a4b933ef1e7961fdcd, type: 2}
-  - {fileID: 11400000, guid: 9b8c0bb52752ec844a5733b173fb6957, type: 2}
   _bodyPartWagerSlot: {fileID: 6410039215493773516, guid: dcb80bc548b260d4eb2ebe034b9a1bbb,
     type: 3}
   _spawnParent: {fileID: 6044307346643329950}

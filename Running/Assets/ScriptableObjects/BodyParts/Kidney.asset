@@ -18,3 +18,5 @@ MonoBehaviour:
   <BodyPartType>k__BackingField: 4
   <BodyPartPrefab>k__BackingField: {fileID: 5816851386409317888, guid: b2c373ffb35cdef4da6fd32b798e95ad,
     type: 3}
+  <BodyPartDescription>k__BackingField: Filters out two operations that are not on
+    the player's head

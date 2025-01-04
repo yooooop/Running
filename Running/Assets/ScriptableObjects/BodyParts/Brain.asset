@@ -18,3 +18,4 @@ MonoBehaviour:
   <BodyPartType>k__BackingField: 1
   <BodyPartPrefab>k__BackingField: {fileID: 1759865864392700244, guid: 0b5735b935a676440b82347b8f4fc905,
     type: 3}
+  <BodyPartDescription>k__BackingField: Doubles the first card's value

@@ -18,3 +18,5 @@ MonoBehaviour:
   <BodyPartType>k__BackingField: 3
   <BodyPartPrefab>k__BackingField: {fileID: 8108774826317780455, guid: cefda4798068165439c677746f27697f,
     type: 3}
+  <BodyPartDescription>k__BackingField: Refreshes the player's number or operation
+    at the player's choice

@@ -22,6 +22,7 @@ namespace Running.Ai
         [Inject] private PlayerData _playerData;
         [Inject] private OpponentData _opponentData;
 
+
         private Dictionary<BodyPartType, int> MaxBodyParts = new Dictionary<BodyPartType, int>()
         {
             [BodyPartType.Brain] = 1,
@@ -151,7 +152,24 @@ namespace Running.Ai
 
         private bool OpponentHasOrgan(BodyPartType organType)
         {
-            return _opponentData.BodyPartsRemaining[organType] > 0;
+            bool result = _opponentData.BodyPartsRemaining[organType] > 0;
+            if (result)
+            {
+                int counter = 0;
+                foreach (BodyPartType type in _opponentData.RoundOrgans)
+                {
+                    if (type == organType)
+                    {
+                        counter++;
+                    }
+                }
+                if (counter >= _opponentData.BodyPartsRemaining[organType])
+                {
+                    result = false;
+                }
+            }
+
+            return result;
         }
 
         private void AfterOpponentUsesKidney()
@@ -280,7 +298,6 @@ namespace Running.Ai
             {
                 _opponentData.UsedOrgans.Add(bodyPartType);
             }
-            Debug.LogError("test1");
             _opponentData.RoundOrgans.Add(bodyPartType);
         }
 

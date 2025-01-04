@@ -78,6 +78,7 @@ namespace Running.Game
         public void RealGameStart()
         {
             RealGameStartedEvent?.Invoke(this, true);
+            SetDialogEvent?.Invoke(this, "Let's start a game");
             _playerData.BodyPartsRemaining = MaxBodyParts;
             _playerData.Life = 4;
             _playerData.UsedOrgans.Clear();
@@ -130,7 +131,8 @@ namespace Running.Game
             {
                 case PhaseType.Default:
                     StartRound();
-                    DelayForFlash(true).Forget();
+                    StartDelay().Forget();
+                    
                     return;
                 case PhaseType.FirstNumberSelection:
                     DelayForFlash(false).Forget();
@@ -167,6 +169,13 @@ namespace Running.Game
             }
         }
 
+        private async UniTaskVoid StartDelay()
+        {
+            await UniTask.Delay(3000);
+
+            DelayForFlash(true).Forget();
+        }
+
         private async UniTaskVoid WaitForCameraSwitch(CameraControl.CameraType type)
         {
             await UniTask.Delay(1000);
@@ -181,6 +190,7 @@ namespace Running.Game
             }
             else if (type == CameraControl.CameraType.Main)
             {
+                await UniTask.Delay(2000);
                 StartNextPhase();
             }
 
@@ -442,6 +452,22 @@ namespace Running.Game
             _currentPhase = PhaseType.Default;
             if (player > opponent)
             {
+                if (_opponentData.RoundOrgans.Contains(BodyPartType.Brain) || _opponentData.RoundOrgans.Contains(BodyPartType.Brain))
+                {
+                    if (_opponentData.BodyPartsRemaining[BodyPartType.Brain] == 0 || _opponentData.BodyPartsRemaining[BodyPartType.Heart] == 0)
+                    {
+                        _opponentData.Life = 1;
+                    }
+                }
+
+                if (_opponentData.RoundOrgans.Contains(BodyPartType.Kidney) || _opponentData.RoundOrgans.Contains(BodyPartType.Lung))
+                {
+                    if (_opponentData.BodyPartsRemaining[BodyPartType.Kidney] == 0 || _opponentData.BodyPartsRemaining[BodyPartType.Lung] == 0)
+                    {
+                        _opponentData.Life = 1;
+                    }
+                }
+
                 foreach (BodyPartType type in _playerData.RoundOrgans)
                 {
                     if (_playerData.BodyPartsRemaining[type] < MaxBodyParts[type])
@@ -454,6 +480,22 @@ namespace Running.Game
             }
             else
             {
+                if (_playerData.RoundOrgans.Contains(BodyPartType.Brain) || _playerData.RoundOrgans.Contains(BodyPartType.Brain))
+                {
+                    if (_playerData.BodyPartsRemaining[BodyPartType.Brain] == 0 || _playerData.BodyPartsRemaining[BodyPartType.Heart] == 0)
+                    {
+                        _playerData.Life = 1;
+                    }
+                }
+
+                if (_playerData.RoundOrgans.Contains(BodyPartType.Kidney) || _playerData.RoundOrgans.Contains(BodyPartType.Lung))
+                {
+                    if (_playerData.BodyPartsRemaining[BodyPartType.Kidney] == 0 || _playerData.BodyPartsRemaining[BodyPartType.Lung] == 0)
+                    {
+                        _playerData.Life = 1;
+                    }
+                }
+
                 foreach (BodyPartType type in _opponentData.RoundOrgans)
                 {
                     if (_opponentData.BodyPartsRemaining[type] < MaxBodyParts[type])

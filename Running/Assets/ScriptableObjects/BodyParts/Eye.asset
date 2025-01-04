@@ -18,3 +18,5 @@ MonoBehaviour:
   <BodyPartType>k__BackingField: 2
   <BodyPartPrefab>k__BackingField: {fileID: 628453759037427477, guid: 6d10f3705fc9fcf4e9ed664e6d5b3950,
     type: 3}
+  <BodyPartDescription>k__BackingField: Allows you to see whether your opponent's
+    card is higher or not

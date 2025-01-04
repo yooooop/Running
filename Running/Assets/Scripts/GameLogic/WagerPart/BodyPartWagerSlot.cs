@@ -7,13 +7,16 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
-public class BodyPartWagerSlot : MonoBehaviour
+public class BodyPartWagerSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Image _organImage;
     [SerializeField] TMP_Text _organText;
+    [SerializeField] TMP_Text _tooltipText;
+    [SerializeField] GameObject _tooltip;
 
     [Inject] private GameController _gameController;
     [Inject] private PlayerData _playerData;
@@ -27,6 +30,7 @@ public class BodyPartWagerSlot : MonoBehaviour
         _organImage.sprite = bodyPart.BodyPartImage;
         _organText.text = bodyPart.BodyPartName;
         _name = bodyPart.BodyPartName;
+        _tooltipText.text = bodyPart.BodyPartDescription;
     }
 
     [UsedImplicitly]
@@ -71,6 +75,21 @@ public class BodyPartWagerSlot : MonoBehaviour
             _gameController.ApplyAbility(bodyPart);
             BodyPartWageredEvent?.Invoke(this, bodyPart);
             _playerData.BodyPartsRemaining[bodyPart]--;
+        }
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (_tooltip != null)
+        {
+            _tooltip.SetActive(true);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (_tooltip != null)
+        {
+            _tooltip.SetActive(false);
         }
     }
 }

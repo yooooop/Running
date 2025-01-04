@@ -418,15 +418,15 @@ namespace Running.Room
                     NumberCardObjectPrefab instance = _container.InstantiatePrefabForComponent<NumberCardObjectPrefab>(card.NumberCardPrefab, _opponentHand);
 
                     instance.Multiplier.SetActive(multiplierSet);
-                    _playerData.FirstCard *= multiplierSet ? 2 : 1;
+                    _opponentData.FirstCard *= multiplierSet ? 2 : 1;
 
                     instance.CardHighlight.IsAbleToSelect = false;
                     instance.CardClickHandler.IsAbleToSelect = false;
 
-                    instance.transform.localPosition = new Vector3(-0.34f, -2.06f, 0f);
-                    instance.transform.localRotation = Quaternion.Euler(64.1f, 163.3f, 343.3f);
+                    instance.transform.localPosition = new Vector3(0.15f, 0.14f, 0);
+                    instance.transform.localRotation = Quaternion.Euler(116.4f, 126f, -218.3f);
 
-                    _playerHands.Add(instance);
+                    _opponentHands.Add(instance);
 
                     break;
                 }
@@ -454,10 +454,10 @@ namespace Running.Room
                     instance.CardHighlight.IsAbleToSelect = false;
                     instance.CardClickHandler.IsAbleToSelect = false;
 
-                    instance.transform.localPosition = new Vector3(0f, 0.4f, 0f);
-                    instance.transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
+                    instance.transform.localPosition = new Vector3(-0.3f, 0.4f, 0f);
+                    instance.transform.localRotation = Quaternion.Euler(-90f, 0f, 0f);
 
-                    _playerHeads.Add(instance);
+                    _opponentHeads.Add(instance);
                 }
             }
 
