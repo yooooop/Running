@@ -1,9 +1,15 @@
+# Unity-generated folders
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/
 /[Ll]ogs/
 /[Pp]ackages/
+
+# Ignore the LibraryFolder in Running
+Running/Library/
+
+# Visual Studio files
 *.csproj
 *.unityproj
 *.sln
