@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a425d3bd278b1154bb5ab7c5e3bd1658, type: 3}
+  m_Name: Eye
+  m_EditorClassIdentifier: 
+  <BodyPartImage>k__BackingField: {fileID: 21300000, guid: 604ed142beddcea40af3a40e4654a88f,
+    type: 3}
+  <BodyPartName>k__BackingField: Eye
+  <BodyPartType>k__BackingField: 2
+  <BodyPartPrefab>k__BackingField: {fileID: 628453759037427477, guid: 6d10f3705fc9fcf4e9ed664e6d5b3950,
+    type: 3}

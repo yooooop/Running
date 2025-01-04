@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a425d3bd278b1154bb5ab7c5e3bd1658, type: 3}
+  m_Name: Heart
+  m_EditorClassIdentifier: 
+  <BodyPartImage>k__BackingField: {fileID: 21300000, guid: 8a81ad785694a6b4fb9e330e66977c7b,
+    type: 3}
+  <BodyPartName>k__BackingField: Heart
+  <BodyPartType>k__BackingField: 0
+  <BodyPartPrefab>k__BackingField: {fileID: 9016239904094854225, guid: 675799e49ab2edd4e893984a0487f8e1,
+    type: 3}
