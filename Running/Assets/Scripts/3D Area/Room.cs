@@ -402,7 +402,7 @@ namespace Running.Room
                     _opponentNumberCardObjectList[index].gameObject.SetActive(false);
 
 
-                    NumberCardObjectPrefab instance = _container.InstantiatePrefabForComponent<NumberCardObjectPrefab>(card.NumberCardPrefab, _playerHand);
+                    NumberCardObjectPrefab instance = _container.InstantiatePrefabForComponent<NumberCardObjectPrefab>(card.NumberCardPrefab, _opponentHand);
 
                     instance.Multiplier.SetActive(multiplierSet);
                     _playerData.FirstCard *= multiplierSet ? 2 : 1;
@@ -436,7 +436,7 @@ namespace Running.Room
                     int index = _operationCardList.IndexOf(card);
                     _opponentOperationCardObjectList[index].gameObject.SetActive(false);
 
-                    OperationCardObjectPrefab instance = _container.InstantiatePrefabForComponent<OperationCardObjectPrefab>(card.OperationCardPrefab, _playerOperationHead);
+                    OperationCardObjectPrefab instance = _container.InstantiatePrefabForComponent<OperationCardObjectPrefab>(card.OperationCardPrefab, _opponentOperationHead);
 
                     instance.CardHighlight.IsAbleToSelect = false;
                     instance.CardClickHandler.IsAbleToSelect = false;
