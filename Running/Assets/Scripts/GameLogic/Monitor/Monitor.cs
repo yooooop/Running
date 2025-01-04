@@ -92,20 +92,59 @@ public class Monitor : MonoBehaviour
             await UniTask.Delay(TimeSpan.FromSeconds(_stopCharacterDelay));
         }
 
-            StringBuilder completeMessage = new StringBuilder();
-            int index = 0;
+        StringBuilder completeMessage = new StringBuilder();
+        int index = 0;
 
-            while (index < roundText.Length)
+        while (index < roundText.Length)
+        {
+            char appendingChar = roundText[index];
+            completeMessage.Append(appendingChar);
+            _roundText.text = completeMessage.ToString();
+
+            await UniTask.Delay(TimeSpan.FromSeconds(defaultDelay));
+
+            index++;
+        }
+
+        await UniTask.Delay(1000);
+
+        if (playerLife == 0)
+        {
+            StringBuilder playerLoseMessage = new StringBuilder();
+            int loseIndex = 0;
+            string text = "Player Loses";
+            while (loseIndex < text.Length)
             {
-                char appendingChar = roundText[index];
-                completeMessage.Append(appendingChar);
-                _roundText.text = completeMessage.ToString();
+                char appendingChar = text[loseIndex];
+                playerLoseMessage.Append(appendingChar);
+                _roundText.text = playerLoseMessage.ToString();
 
                 await UniTask.Delay(TimeSpan.FromSeconds(defaultDelay));
 
-                index++;
+                loseIndex++;
             }
 
+            _gameController.GameFinished(false);
+        }
+
+        if (opponentLife == 0)
+        {
+            StringBuilder playerWinMessage = new StringBuilder();
+            int winIndex = 0;
+            string text = "Player Wins";
+            while (winIndex < text.Length)
+            {
+                char appendingChar = text[winIndex];
+                playerWinMessage.Append(appendingChar);
+                _roundText.text = playerWinMessage.ToString();
+
+                await UniTask.Delay(TimeSpan.FromSeconds(defaultDelay));
+
+                winIndex++;
+            }
+
+            _gameController.GameFinished(true);
+        }
     }
 
 }

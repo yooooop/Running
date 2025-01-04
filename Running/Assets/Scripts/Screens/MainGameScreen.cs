@@ -39,12 +39,13 @@ namespace Running.Game
             _gameController.BodyPartCardSelectedEvent += WagerWagered;
             _gameController.GameStartedEvent += ResetUI;
             _gameController.SetDialogEvent += OnMessageDisplay;
-            _gameController.StartNextPhase();
+            
         }
 
-        private void Start()
+        private void OnEnable()
         {
-
+            _gameController.RealGameStart();
+            _gameController.StartNextPhase();
         }
 
         private void DistributeOperationCards()

@@ -1,6 +1,7 @@
 using Running.Ai;
 using Running.BodyPart;
 using Running.Game;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,8 @@ namespace Running.Player
         [SerializeField] List<GameObject> _leftRibs = new List<GameObject>();
         [SerializeField] List<GameObject> _rightRibs = new List<GameObject>();
         [SerializeField] List<GameObject> _eyes = new List<GameObject>();
+        [SerializeField] GingerBreadManAnimator _animator;
+        [SerializeField] bool _onlyInGame;
 
         [Inject] private GameController _gameController;
         [Inject] private AiController _aiController;
@@ -28,8 +31,8 @@ namespace Running.Player
             _aiController.OpponentUseOrganEvent += OnAiOrganDisableEvent;
             _aiController.OpponentRegenerateOrganEvent += OnAiOrganEnableEvent;
             _gameController.OpponentRegenerateOrganEvent += OnAiOrganEnableEvent;
-
-
+            _gameController.GameFinishedEvent += DestroyAny;
+            _gameController.RealGameStartedEvent += EnableEvery;
         } 
 
         private void OnAiOrganDisableEvent(object sender, BodyPartType bodyPartType)
@@ -74,10 +77,10 @@ namespace Running.Player
             switch (bodyPartType.ToString())
             {
                 case "Heart":
-                    _heart.SetActive(false);
+                    _heart.SetActive(true);
                     return;
                 case "Brain":
-                    _brain.SetActive(false);
+                    _brain.SetActive(true);
                     return;
                 case "Eye":
                     _eyes[Mathf.Abs(_opponentData.BodyPartsRemaining[bodyPartType] % 2)].SetActive(true);
@@ -98,5 +101,42 @@ namespace Running.Player
             _opponentData.BodyPartsRemaining[bodyPartType]++;
         }
 
+        public void PlayWinningAnimation()
+        {
+            _animator.PlayWinningAnimation();
+        }
+
+        public void DestroyAny(object sender, bool e)
+        {
+            if (_onlyInGame)
+            {
+                gameObject.SetActive(false);
+            }
+            
+        }
+
+        private void EnableEvery(object sender, bool e)
+        {
+            if (_onlyInGame)
+            {
+                gameObject.SetActive(true);
+                _heart.SetActive(true);
+                _brain.SetActive(true);
+                _eyes[0].SetActive(true);
+                _eyes[1].SetActive(true);
+                _lungs[0].SetActive(true);
+                _lungs[1].SetActive(true);
+                _kidneys[0].SetActive(true);
+                _kidneys[1].SetActive(true);
+                _rightRibs[0].SetActive(true);
+                _rightRibs[1].SetActive(true);
+                _rightRibs[2].SetActive(true);
+                _rightRibs[3].SetActive(true); 
+                _leftRibs[0].SetActive(true);
+                _leftRibs[1].SetActive(true);
+                _leftRibs[2].SetActive(true);
+                _leftRibs[3].SetActive(true);
+            }
+        }
     }
 }

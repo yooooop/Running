@@ -44,6 +44,8 @@ namespace Running.Game
         public event EventHandler<bool> FlashCardsEvent;
         public event EventHandler<bool> EnableCardsEvent;
         public event EventHandler<List<BodyPartType>> OpponentOrganWageredEvent;
+        public event EventHandler<bool> GameFinishedEvent;
+        public event EventHandler<bool> RealGameStartedEvent;
 
         private PhaseType _currentPhase = PhaseType.Default;
         private List<NumberCard> _numberCardList = new List<NumberCard>();
@@ -73,6 +75,20 @@ namespace Running.Game
             _cameraController.OnCameraSwitchFinishedEvent += OnCameraMonitorSet;
         }
 
+        public void RealGameStart()
+        {
+            RealGameStartedEvent?.Invoke(this, true);
+            _playerData.BodyPartsRemaining = MaxBodyParts;
+            _playerData.Life = 4;
+            _playerData.UsedOrgans.Clear();
+            _playerData.RoundOrgans.Clear();
+            _opponentData.BodyPartsRemaining = MaxBodyParts;
+            _opponentData.Life = 4;
+            _opponentData.UsedOrgans.Clear();
+            _opponentData.RoundOrgans.Clear();
+
+        }
+
         public void OrganWagered(BodyPartType bodyPartType)
         {
             PlayerOrganWageredEvent?.Invoke(this, bodyPartType);
@@ -99,9 +115,17 @@ namespace Running.Game
             return _currentPhase;
         }
 
+        public void GameFinished(bool didPlayerWin)
+        {
+            
+            GameFinishedEvent?.Invoke(this, didPlayerWin);
+            WaitForCameraSwitch(CameraControl.CameraType.EndGame).Forget();
+        }
+
         public void StartNextPhase()
         {
-            //Debug.LogError("current phase: " + _currentPhase);
+            //Debug.LogError("start next phase");
+            Debug.LogError("current phase: " + _currentPhase);
             switch (_currentPhase)
             {
                 case PhaseType.Default:
@@ -372,6 +396,7 @@ namespace Running.Game
 
         public int CombineNumbers(int num1, int num2)
         {
+            Debug.LogError("num: " + num1 + " num2: " + num2);
             if (num2 == -1)
             {
                 return -int.Parse($"{num1}1");
@@ -442,6 +467,7 @@ namespace Running.Game
 
             DelayInSwitchingCamera().Forget();
 
+            Debug.LogError("test2");
             _playerData.RoundOrgans.Clear();
             _opponentData.RoundOrgans.Clear();
         }
@@ -463,6 +489,12 @@ namespace Running.Game
         private async UniTaskVoid DelayInSwitchingCamera()
         {
             await UniTask.Delay(9000);
+
+            if (_opponentData.Life == 0 || _playerData.Life == 0)
+            {
+                return;
+            }
+
             _cameraController.SwitchActiveCamera(CameraControl.CameraType.Main);
             // win lose logic goes here
             StartNextPhase();

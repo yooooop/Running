@@ -20,6 +20,15 @@ namespace Running.Room
         [SerializeField] Transform _opponentHand;
         [SerializeField] Transform _playerOperationHead;
         [SerializeField] Transform _opponentOperationHead;
+        [SerializeField] DeadManPrefab _playerDeadMan;
+        [SerializeField] DeadManPrefab _opponentDeadMan;
+        [SerializeField] GameObject _playerWinningMan;
+        [SerializeField] GameObject _opponentWinningMan;
+        [SerializeField] GameObject _playerEndChair;
+        [SerializeField] GameObject _opponentEndChair;
+        [SerializeField] GameObject _playerGameChair;
+        [SerializeField] GameObject _opponentGameChair;
+        
 
         private Vector3 _playerNumberCardPosition = new Vector3(-3.75f, 0.024f, -3.53f);
         private Vector3 _playerOperationCardPosition = new Vector3(-1.99f, 0.024f, -2.11f);
@@ -61,10 +70,14 @@ namespace Running.Room
             _gameController.HeartUsedEvent += MultiplierSet;
             _gameController.ResetAllCardsEvent += ResetTableCards;
             _gameController.FlashCardsEvent += FlashCards;
+            _gameController.GameFinishedEvent += GameEnded;
         }
         private void InstantiateNumberCards(object sender, List<NumberCard> list)
         {
-
+            _playerEndChair.SetActive(false);
+            _opponentEndChair.SetActive(false);
+            _playerGameChair.SetActive(true);
+            _opponentGameChair.SetActive(true);
             // instantiate player cards
             foreach (NumberCard card in list)
             {
@@ -524,10 +537,44 @@ namespace Running.Room
                 }
             }
         }
+
+        private void GameEnded(object sender, bool didPlayerWin)
+        {
+
+            _playerEndChair.SetActive(true);
+            _opponentEndChair.SetActive(true);
+            _playerGameChair.SetActive(false);
+            _opponentGameChair.SetActive(false);
+            if (didPlayerWin)
+            {
+                _playerWinningMan.gameObject.SetActive(true);
+                _opponentWinningMan.gameObject.SetActive(false);
+                //PlayWinningAnimation(_playerWinningMan).Forget();
+                _playerDeadMan.gameObject.SetActive(false);
+                _opponentDeadMan.gameObject.SetActive(true);
+                
+            }
+            else
+            {
+                _playerWinningMan.gameObject.SetActive(false);
+                _opponentWinningMan.gameObject.SetActive(true);
+                _playerDeadMan.gameObject.SetActive(true);
+                _opponentDeadMan.gameObject.SetActive(false);
+                //PlayWinningAnimation(_opponentWinningMan).Forget();
+                
+            }
+        }
+
+
+        private async UniTaskVoid PlayWinningAnimation(GingerBreadMan winningMan)
+        {
+            await UniTask.Delay(1000);
+            winningMan.PlayWinningAnimation();
+        }
     }
 
 }
 
 
-// 2. sometimes organs don't turn off properly
-// 3. operation refresh doesn't refresh the operation properly
+// operation refresh doesn't show up properly
+// operation refresh card disappears immediately after TODO

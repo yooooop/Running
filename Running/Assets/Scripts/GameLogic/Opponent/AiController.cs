@@ -280,6 +280,7 @@ namespace Running.Ai
             {
                 _opponentData.UsedOrgans.Add(bodyPartType);
             }
+            Debug.LogError("test1");
             _opponentData.RoundOrgans.Add(bodyPartType);
         }
 

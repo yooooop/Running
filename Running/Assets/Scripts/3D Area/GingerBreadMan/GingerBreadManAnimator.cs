@@ -44,6 +44,11 @@ namespace Running.Player
 
         private void OpponentNumberCadSelected(object sender, int number)
         {
+            if (!gameObject.activeSelf)
+            {
+                return;
+            }
+
             _animator.SetTrigger("PickUpCard");
             foreach (NumberCard card in _numberCardList)
             {
@@ -57,6 +62,11 @@ namespace Running.Player
 
         private void OpponentOperationCardSelected(object sender, OperationType operationType)
         {
+            if (!gameObject.activeSelf)
+            {
+                return;
+            }
+
             _animator.SetTrigger("PickUpOperation");
             foreach (OperationCard card in _operationCardList)
             {
@@ -70,6 +80,11 @@ namespace Running.Player
 
         private void OrganWagered(object sender, List<BodyPartType> list)
         {
+            if (!gameObject.activeSelf)
+            {
+                return;
+            }
+
             float length = GetAnimationClipLength("WagerOrgan");
             length += GetAnimationClipLength("Idle");
             length *= 1000;
@@ -89,7 +104,7 @@ namespace Running.Player
 
         private async UniTaskVoid PlayWagerOrganAnimation(List<BodyPartType> list, int length)
         {
-            
+            Debug.LogError("test start");
             foreach (BodyPartType type in list)
             {
                 foreach (BodyPartScriptableObject obj in _bodyPartList)
@@ -211,6 +226,14 @@ namespace Running.Player
                 }
             }
             return 0f;
+        }
+
+        public void PlayWinningAnimation()
+        {
+            if (_animator != null)
+            {
+                //_animator.SetTrigger("WinAnimation");
+            }
         }
 
     }

@@ -98,6 +98,7 @@ MonoBehaviour:
   _eyes:
   - {fileID: 8819498480832670693}
   - {fileID: 5510848355948301931}
+  _animator: {fileID: 2651836360746124578}
 --- !u!95 &1941953516512595720
 Animator:
   serializedVersion: 5

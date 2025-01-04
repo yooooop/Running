@@ -7,5 +7,6 @@ namespace Running.CameraControl
         ScreenMonitor,
         Transition,
         ScaleView,
+        EndGame,
     }
 }
