@@ -44,7 +44,9 @@ namespace Running.Game
 
         private void OnEnable()
         {
+
             _gameController.RealGameStart();
+            
             _gameController.StartNextPhase();
         }
 

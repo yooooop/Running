@@ -71,13 +71,11 @@ namespace Running.Room
             _gameController.ResetAllCardsEvent += ResetTableCards;
             _gameController.FlashCardsEvent += FlashCards;
             _gameController.GameFinishedEvent += GameEnded;
+            _gameController.RealGameStartedEvent += GameStarted;
         }
         private void InstantiateNumberCards(object sender, List<NumberCard> list)
         {
-            _playerEndChair.SetActive(false);
-            _opponentEndChair.SetActive(false);
-            _playerGameChair.SetActive(true);
-            _opponentGameChair.SetActive(true);
+            
             // instantiate player cards
             foreach (NumberCard card in list)
             {
@@ -563,6 +561,19 @@ namespace Running.Room
                 //PlayWinningAnimation(_opponentWinningMan).Forget();
                 
             }
+        }
+
+        private void GameStarted(object sender, bool test)
+        {
+            Debug.LogError("game started run");
+            _playerEndChair.SetActive(false);
+            _opponentEndChair.SetActive(false);
+            _playerGameChair.SetActive(true);
+            _opponentGameChair.SetActive(true);
+            _playerWinningMan.gameObject.SetActive(false);
+            _opponentWinningMan.gameObject.SetActive(false);
+            _playerDeadMan.gameObject.SetActive(false);
+            _opponentDeadMan.gameObject.SetActive(false);
         }
 
 

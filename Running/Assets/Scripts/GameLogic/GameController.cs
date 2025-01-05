@@ -79,6 +79,8 @@ namespace Running.Game
         {
             RealGameStartedEvent?.Invoke(this, true);
             SetDialogEvent?.Invoke(this, "Let's start a game");
+            ResetAllCardsEvent?.Invoke(this, EventArgs.Empty);
+            GameStartedEvent?.Invoke(this, true);
             _playerData.BodyPartsRemaining = MaxBodyParts;
             _playerData.Life = 4;
             _playerData.UsedOrgans.Clear();
@@ -87,6 +89,7 @@ namespace Running.Game
             _opponentData.Life = 4;
             _opponentData.UsedOrgans.Clear();
             _opponentData.RoundOrgans.Clear();
+            _cameraController.SwitchActiveCamera(CameraControl.CameraType.Main);
 
         }
 
